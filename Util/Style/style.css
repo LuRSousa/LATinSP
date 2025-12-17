@@ -1,0 +1,1615 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Loved+by+the+King&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#menu {
+  background-color: #eab386;
+  height: 12vh;
+  width: 100vw;
+  z-index: 1000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+#menu .logo {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 24px;
+}
+#menu .logo img {
+  width: 300px;
+}
+
+main {
+  height: 88vh;
+  width: 100vw;
+  position: relative;
+}
+main #map {
+  height: 100%;
+  width: 100%;
+}
+main #screenCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(217, 217, 217, 0.4745098039);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  display: block;
+}
+main .helpFloating {
+  position: absolute;
+  bottom: 100px;
+  right: 24px;
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  display: block;
+}
+main .helpFloating:hover {
+  transform: scale(1.1);
+  background: rgb(0, 73, 69.4677419355);
+}
+main .helpFloating img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+main #alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #faf3e0;
+  border: 3px solid #e18943;
+  color: #2c343a;
+  border-radius: 15px;
+  gap: 16px;
+  width: 400px;
+  height: 350px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1200;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+}
+main #alert.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+main #alert .top {
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+main #alert .top .close {
+  position: absolute;
+  border: none;
+  width: 25px;
+  height: 25px;
+  right: 12px;
+  top: 8px;
+  padding: 1px;
+  background-color: #faf3e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+main #alert .top .close:hover {
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+main #alert .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+main #alert .text #alertDescription {
+  padding: 0px 24px;
+}
+main #alert #clearFiltersAlert {
+  border: none;
+  border-radius: 10px;
+  background-color: #B94D5A;
+  padding: 8px 0px;
+  width: 80%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  transition: 0.5s;
+  color: #faf3e0;
+  margin-bottom: 32px;
+}
+main #alert #clearFiltersAlert:hover {
+  transform: scale(1.02);
+  background-color: #B23A48;
+  transition: 0.5s;
+}
+
+#introCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #faf3e0;
+  border: 3px solid #007C76;
+  color: #2c343a;
+  border-radius: 15px;
+  width: 800px;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1400;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+}
+#introCard.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+#introCard .introHeader {
+  width: 100%;
+  padding: 32px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+}
+#introCard .introHeader .introLogo img {
+  height: 80px;
+}
+#introCard .introMain {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  flex: 1;
+  overflow-y: auto;
+}
+#introCard .introMain .introContent {
+  text-align: center;
+}
+#introCard .introMain .introContent h2 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: #007C76;
+}
+#introCard .introMain .introContent #introDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+#introCard .introMain .introContent #introDescription p {
+  margin-bottom: 12px;
+}
+#introCard .introMain .introContent .introFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+#introCard .introMain .introContent .introFeatures .feature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 12px;
+}
+#introCard .introMain .introContent .introFeatures .feature svg {
+  flex-shrink: 0;
+  color: #007C76;
+}
+#introCard .introMain .introContent .introFeatures .feature span {
+  font-weight: 500;
+  width: 90%;
+  text-align: left;
+  color: #2c343a;
+  border-bottom: 2px solid #007C76;
+  padding-bottom: 8px;
+}
+#introCard .introMain .introActions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#introCard .introMain .introActions .btnPrimary {
+  min-width: 180px;
+  background-color: transparent;
+  color: #007C76;
+  border: 2px solid #007C76;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#introCard .introMain .introActions .btnPrimary:hover {
+  transform: scale(1.05);
+}
+#introCard .introMain .introActions .btnSecondary {
+  min-width: 180px;
+  background-color: #007C76;
+  color: #faf3e0;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#introCard .introMain .introActions .btnSecondary:hover {
+  transform: scale(1.05);
+}
+#introCard .footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 16px 8px 16px;
+}
+#introCard .footer p {
+  color: #585b5e;
+  font-size: 0.8rem;
+  width: 45%;
+  text-align: center;
+}
+
+#tutorialCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 800px;
+  max-width: 90vw;
+  max-height: 85vh;
+  min-height: 540px;
+  background: #faf3e0;
+  border: 3px solid #007C76;
+  border-radius: 15px;
+  z-index: 1999;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#tutorialCard.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+#tutorialCard .tutorialHeader {
+  width: 100%;
+  padding: 16px 24px 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+  color: #faf3e0;
+  position: relative;
+}
+#tutorialCard .tutorialHeader h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+#tutorialCard .tutorialHeader .btnText {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #007C76;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+#tutorialCard .tutorialHeader .btnText:hover {
+  color: rgb(0, 73, 69.4677419355);
+}
+#tutorialCard .tutorialContent {
+  padding: 0px 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+#tutorialCard .tutorialContent .tutorialSlide {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+}
+#tutorialCard .tutorialContent .tutorialSlide.active {
+  display: flex;
+}
+#tutorialCard .tutorialContent .tutorialSlide .tutorialImage {
+  max-height: 300px;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #007C76;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+#tutorialCard .tutorialContent .tutorialSlide .tutorialText {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+#tutorialCard .tutorialContent .tutorialSlide .tutorialText h4 {
+  font-size: 1.5rem;
+  color: #007C76;
+}
+#tutorialCard .tutorialContent .tutorialSlide .tutorialText p {
+  width: 80%;
+  font-size: 1rem;
+  color: #2c343a;
+}
+#tutorialCard .tutorialFooter {
+  padding: 16px 24px 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+#tutorialCard .tutorialFooter .btnPrimary {
+  min-width: 100px;
+  background-color: #007C76;
+  color: #faf3e0;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#tutorialCard .tutorialFooter .btnPrimary:hover {
+  transform: scale(1.05);
+}
+#tutorialCard .tutorialFooter .btnSecondary {
+  min-width: 100px;
+  background-color: transparent;
+  color: #007C76;
+  border: 2px solid #007C76;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#tutorialCard .tutorialFooter .btnSecondary:hover {
+  transform: scale(1.05);
+}
+#tutorialCard .tutorialFooter .tutorialProgress {
+  font-weight: 600;
+  color: #007C76;
+}
+
+#filters {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #ecbc94;
+  width: 400px;
+  height: 62px;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: height 0.4s ease;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#filters #filters::-webkit-scrollbar {
+  display: none;
+}
+#filters .dropdownBar {
+  width: 100%;
+  background-color: #ecbc94;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-top: 2px;
+}
+#filters .dropdownBar .dropdown {
+  border: none;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 4px 12px;
+  background-color: #edcbaf;
+  cursor: pointer;
+  box-shadow: -1px 6px 14px -3px #2c343a;
+  -webkit-box-shadow: -1px 6px 14px -3px #2c343a;
+  -moz-box-shadow: -1px 6px 14px -3px #2c343a;
+}
+#filters .dropdownBar .dropdown div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+  gap: 5px;
+  color: #2c343a;
+}
+#filters .dropdownBar .dropdown .arrow {
+  transition: 500ms;
+  color: #2c343a;
+}
+#filters .filterForm {
+  margin-top: 30px;
+  display: flex;
+  opacity: 0;
+  height: calc(100% - 150px);
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+  transition: opacity 0.4s ease;
+}
+#filters .filterForm .filterSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 95%;
+  background-color: #edcbaf;
+  box-shadow: -1px 6px 14px -3px #2c343a;
+  -webkit-box-shadow: -1px 6px 14px -3px #2c343a;
+  -moz-box-shadow: -1px 6px 14px -3px #2c343a;
+}
+#filters .filterForm .filterSection .sectionTitle {
+  width: 100%;
+  position: relative;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+#filters .filterForm .filterSection .sectionTitle div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+  gap: 5px;
+  color: #2c343a;
+}
+#filters .filterForm .filterSection .sectionTitle div #ratingLabelMax {
+  margin-top: 4px;
+}
+#filters .filterForm .filterSection .sectionTitle .arrow {
+  transition: 500ms;
+  color: #2c343a;
+}
+#filters .filterForm .filterSection .filterOptions {
+  max-height: 0;
+  width: 95%;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  flex-wrap: wrap;
+  padding: 0;
+}
+#filters .filterForm .filterSection .filterOptions.open {
+  max-height: 700px;
+  opacity: 1;
+  padding: 16px 8px;
+}
+#filters .filterForm .filterSection .filterOptions .option {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+#filters .filterForm .filterSection .filterOptions .option:focus-within {
+  background-color: rgba(225, 137, 67, 0.1);
+  border-radius: 4px;
+}
+#filters .filterForm .filterSection .filterOptions .option input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+  accent-color: #198983;
+  cursor: pointer;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-color: #faf3e0;
+  border-radius: 3px;
+  transition: 200ms;
+  border: 2px solid #faf3e0;
+}
+#filters .filterForm .filterSection .filterOptions .option input[type=checkbox]:hover {
+  border: 2px solid #198983;
+  transition: 200ms;
+}
+#filters .filterForm .filterSection .filterOptions .option input[type=checkbox]:checked {
+  background: #198983;
+  border: 2px solid #198983;
+  transition: 200ms;
+}
+#filters .filterForm .filterSection .filterOptions .option .label {
+  font-size: 0.9rem;
+  color: #2c343a;
+}
+#filters .filterForm .filterSection .filterOptions .value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  color: #2c343a;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 65%;
+  height: 8px;
+  background: #faf3e0;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(to right, #198983 0%, #198983 var(--progress, 0%), #faf3e0 var(--progress, 0%), #faf3e0 100%);
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #007C76;
+  cursor: pointer;
+  margin-top: -4px;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #007C76;
+  cursor: pointer;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-ms-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #007C76;
+  cursor: pointer;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 8px;
+  border-radius: 3px;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-moz-range-track {
+  background: transparent;
+  height: 8px;
+  border-radius: 3px;
+}
+#filters .filterForm .filterSection .filterOptions input[type=range]::-ms-track {
+  background: transparent;
+  height: 8px;
+  border-radius: 3px;
+}
+#filters .filterForm .btns {
+  width: 100%;
+  background-color: #ecbc94;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0px;
+  position: sticky;
+  bottom: 0;
+}
+#filters .filterForm .btns #applyFilters {
+  border: none;
+  border-radius: 10px;
+  background-color: #198983;
+  padding: 8px 0px;
+  width: 95%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  transition: 0.5s;
+  color: #faf3e0;
+}
+#filters .filterForm .btns #applyFilters:hover {
+  transform: scale(1.02);
+  background-color: #007C76;
+  transition: 0.5s;
+}
+#filters .filterForm .btns #clearFilters {
+  border: none;
+  border-radius: 10px;
+  background-color: #B94D5A;
+  padding: 8px 0px;
+  width: 95%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  transition: 0.5s;
+  color: #faf3e0;
+}
+#filters .filterForm .btns #clearFilters:hover {
+  transform: scale(1.02);
+  background-color: #B23A48;
+  transition: 0.5s;
+}
+
+#miniCard {
+  position: absolute;
+  background: #faf3e0;
+  border: 3px solid #e18943;
+  color: #2c343a;
+  border-radius: 15px;
+  width: 380px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: 800;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: scale(0.95);
+  overflow: hidden;
+}
+#miniCard.active {
+  opacity: 1;
+  transform: scale(1);
+}
+#miniCard .miniFlag {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 12px 12px 0px 0px;
+}
+#miniCard .miniFlag .close {
+  position: absolute;
+  border: none;
+  width: 25px;
+  height: 25px;
+  right: 12px;
+  top: 8px;
+  padding: 1px;
+  background-color: #faf3e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#miniCard .miniFlag .close:hover {
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+#miniCard .miniMain {
+  width: 100%;
+  border-top: 3px solid #2c343a;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+#miniCard .miniMain h3 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #2c343a;
+  padding: 0px 24px 4px 24px;
+  text-align: center;
+}
+#miniCard .miniMain p .sr-only {
+  position: relative;
+}
+#miniCard .miniMain .miniCarrousel {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+#miniCard .miniMain .miniCarrousel .carrouselItem {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 80%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.95) translateX(-50%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+}
+#miniCard .miniMain .miniCarrousel .carrouselItem.active {
+  opacity: 1;
+  transform: scale(1) translateX(-50%);
+}
+#miniCard .miniMain .miniCarrousel .carrouselItem img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0px 4px 8px -4px #2c343a;
+  -webkit-box-shadow: 0px 4px 8px -4px #2c343a;
+  -moz-box-shadow: 0px 4px 8px -4px #2c343a;
+}
+#miniCard .miniMain .miniCarrousel button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+#miniCard .miniMain .ratingPrice {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-weight: bold;
+}
+#miniCard .miniMain .ratingPrice p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#miniCard .miniMain .ratingPrice p:last-child {
+  display: flex;
+  gap: 2px;
+}
+#miniCard .miniInfo {
+  width: 100%;
+  padding: 16px;
+  border-radius: 0px 0px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+#miniCard .miniInfo .addressDesc {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #faf3e0;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+#miniCard .miniInfo .addressDesc .address {
+  width: 95%;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(47, 47, 47, 0.3490196078);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+#miniCard .miniInfo .addressDesc .address p {
+  text-decoration: none;
+}
+#miniCard .miniInfo .addressDesc .address svg path {
+  transform: translateX(-30%) translateY(-10%);
+}
+#miniCard .miniInfo .addressDesc .tagsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+#miniCard .miniInfo .addressDesc .tagsContainer .tag {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: rgba(255, 124, 16, 0.5137254902);
+  display: inline-block;
+  transition: 500ms;
+  white-space: nowrap;
+}
+#miniCard .miniInfo .showMore {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  background-color: #faf3e0;
+  padding: 8px 0px;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  transition: 0.5s;
+}
+#miniCard .miniInfo .showMore span {
+  margin-right: 30px;
+  color: #2c343a;
+}
+#miniCard .miniInfo .showMore svg {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  padding: 9px 0px;
+  width: 45px;
+  border-radius: 0px 10px 10px 0px;
+  fill: #faf3e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
+#miniCard .miniInfo .showMore:hover {
+  transform: scale(1.02);
+  background-color: rgba(243, 241, 233, 0.8);
+  transition: 0.5s;
+}
+
+#bigCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #faf3e0;
+  border: 3px solid #e18943;
+  color: #2c343a;
+  border-radius: 15px;
+  width: 980px;
+  height: 650px;
+  display: none;
+  flex-direction: column;
+  z-index: 1200;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+}
+#bigCard.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+#bigCard .bigFlag {
+  width: 100%;
+  height: 98px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 12px 12px 0px 0px;
+  position: relative;
+}
+#bigCard .bigFlag .close {
+  position: absolute;
+  border: none;
+  width: 25px;
+  height: 25px;
+  right: 12px;
+  top: 8px;
+  padding: 1px;
+  background-color: #faf3e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+#bigCard .bigFlag .close:hover {
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+#bigCard .bigMain {
+  width: 100%;
+  height: 100%;
+  border-top: 3px solid #2c343a;
+}
+#bigCard .bigMain .bigTop {
+  width: 100%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid #2c343a;
+  position: relative;
+}
+#bigCard .bigMain .bigTop p {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+#bigCard .bigMain .bigTop h2,
+#bigCard .bigMain .bigTop h3 {
+  width: 50%;
+  text-align: center;
+}
+#bigCard .bigMain .bigMiddle {
+  width: 100%;
+  height: 8%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid #2c343a;
+  position: relative;
+}
+#bigCard .bigMain .bigBottom {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  gap: 24px;
+  border-radius: 0px 0px 0px 12px;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo {
+  width: 100%;
+  height: 90%;
+  background-color: #faf3e0;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 8px;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top h3 {
+  padding-bottom: 8px;
+  text-align: center;
+  border-bottom: 1px solid #2c343a;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 6px;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p a {
+  text-decoration: none;
+  color: #2c343a;
+  transition: 500ms;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p a:hover {
+  text-decoration: underline;
+  transition: 500ms;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom {
+  width: 100%;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .starsBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .tagsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  padding: 0px 8px;
+  border-top: 1px solid #2c343a;
+  padding-top: 16px;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .tagsContainer .tag {
+  width: auto;
+  font-size: 0.8rem;
+  padding: 8px 8px;
+  border-radius: 5px;
+  background-color: rgba(255, 124, 16, 0.5137254902);
+  transition: 500ms;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfoBtn {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  background-color: #faf3e0;
+  padding: 8px 0px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 8px 12px -4px #2c343a;
+  -webkit-box-shadow: 0px 8px 12px -4px #2c343a;
+  -moz-box-shadow: 0px 8px 12px -4px #2c343a;
+  transition: 0.5s;
+  text-decoration: none;
+  color: #2c343a;
+  display: flex;
+  justify-content: center;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfoBtn span {
+  margin-right: 30px;
+  text-decoration: none;
+  color: #2c343a;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfoBtn svg {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  padding: 9px 0px;
+  width: 45px;
+  border-radius: 0px 10px 10px 0px;
+  fill: #faf3e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
+#bigCard .bigMain .bigBottom .bigInfoAll .bigInfoBtn:hover {
+  transform: scale(1.02);
+  background-color: rgba(243, 241, 233, 0.8);
+  transition: 0.5s;
+}
+#bigCard .bigMain .bigBottom .bigImgs {
+  width: 50%;
+  height: 100%;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs {
+  width: 100%;
+  height: 50%;
+  padding: 24px 16px 8px 16px;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel .carrouselItem {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 85%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.95) translateX(-50%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel .carrouselItem.active {
+  opacity: 1;
+  transform: scale(1) translateX(-50%);
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel .carrouselItem img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0px 4px 8px -4px #2c343a;
+  -webkit-box-shadow: 0px 4px 8px -4px #2c343a;
+  -moz-box-shadow: 0px 4px 8px -4px #2c343a;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs {
+  width: 100%;
+  height: 50%;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate {
+  width: 28%;
+  max-width: 130px;
+  min-height: 60px;
+  height: 45%;
+  max-height: 90px;
+  display: flex;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px -4px #2c343a;
+  -webkit-box-shadow: 0px 4px 8px -4px #2c343a;
+  -moz-box-shadow: 0px 4px 8px -4px #2c343a;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  opacity: 0;
+  background: #2C343A;
+  background: linear-gradient(360deg, rgb(44, 52, 58) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: 500ms;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  color: #faf3e0;
+  padding: 4px 8px;
+}
+#bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate p:hover {
+  opacity: 1;
+  transition: 500ms;
+}
+
+@media (max-width: 1024px) {
+  #miniCard {
+    left: 50% !important;
+    top: 42% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  #bigCard {
+    position: absolute;
+    max-width: 100%;
+    max-height: calc(90vh - 110px);
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    top: 0;
+    transform: translate(-50%, 0%) !important;
+  }
+  #bigCard .bigFlag {
+    border-radius: 0px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll {
+    border-radius: 0;
+  }
+}
+@media (max-width: 900px) {
+  #menu {
+    height: 9vh;
+    justify-content: center;
+  }
+  #menu .logo img {
+    width: 200px;
+  }
+  #filters .filterForm .btns #clearFilters, #filters .filterForm .btns #applyFilters {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+  }
+  main {
+    height: 91vh;
+  }
+  main .helpFloating {
+    width: 50px;
+    height: 50px;
+    bottom: 120px;
+  }
+  #introCard .introMain {
+    padding: 24px 16px;
+    gap: 24px;
+  }
+  #introCard .introMain .introContent h2 {
+    font-size: 2rem;
+  }
+  #introCard .introMain .introContent .introFeatures .feature {
+    text-align: center;
+    gap: 8px;
+  }
+  #introCard .introMain .introContent .introFeatures .feature span {
+    text-align: center;
+  }
+  #introCard .introMain .introActions {
+    flex-direction: column;
+  }
+  #introCard .introMain .introActions button {
+    width: 100%;
+  }
+  #tutorialCard {
+    width: 95vw;
+  }
+  #tutorialCard .tutorialContent {
+    padding: 24px 16px;
+  }
+  #tutorialCard .tutorialContent .tutorialSlide .tutorialImage {
+    max-height: 200px;
+  }
+  #tutorialCard .tutorialFooter {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  #tutorialCard .tutorialFooter .btnText {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+  }
+  #miniCard {
+    max-height: 450px;
+    width: 320px;
+    margin-top: 30px;
+  }
+  #miniCard .miniFlag {
+    height: 50px;
+  }
+  #miniCard .miniMain {
+    padding: 8px 8px;
+    gap: 8px;
+  }
+  #miniCard .miniMain h3 {
+    font-size: 0.95rem;
+    padding: 0px 24px 0px 24px;
+  }
+  #miniCard .miniMain .miniCarrousel {
+    height: 130px;
+  }
+  #miniCard .miniMain .ratingPrice p {
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+  }
+  #miniCard .miniInfo {
+    padding: 8px 8px;
+    gap: 8px;
+  }
+  #miniCard .miniInfo .addressDesc .address {
+    gap: 8px;
+  }
+  #miniCard .miniInfo .addressDesc .address svg {
+    height: 20px;
+  }
+  #miniCard .miniInfo .addressDesc .address p {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
+  #miniCard .miniInfo .addressDesc .tagsContainer {
+    gap: 4px;
+  }
+  #miniCard .miniInfo .addressDesc .tagsContainer .tag {
+    font-size: clamp(0.7rem, 3vw, 0.8rem);
+  }
+  #miniCard .miniInfo .showMore {
+    font-size: 1.1rem;
+    padding: 6px 0px;
+  }
+  #bigCard .bigFlag {
+    background-size: cover;
+    height: 60px;
+  }
+  #bigCard .bigMain .bigTop h2, #bigCard .bigMain .bigTop h3 {
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
+  }
+  #bigCard .bigMain .bigMiddle {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  #bigCard .bigMain .bigMiddle .info {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 40%;
+    padding: 0;
+    color: #2c343a;
+  }
+  #bigCard .bigMain .bigMiddle .active {
+    color: #e18943;
+    border-bottom: 2px solid #e18943;
+  }
+  #bigCard .bigMain .bigBottom {
+    display: flex;
+    height: 80%;
+    position: relative;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll {
+    position: absolute;
+    width: 100%;
+    padding: 8px;
+    gap: 16px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo {
+    padding: 8px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top {
+    gap: 6px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top h3 {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    padding-bottom: 4px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p {
+    font-size: clamp(0.9rem, 3vw, 1.3rem);
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p svg {
+    width: 32px;
+    height: 32px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .tagsContainer {
+    padding-top: 8px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .tagsContainer .tag {
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
+    padding: 4px 6px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfoBtn {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+  #bigCard .bigMain .bigBottom .bigImgs {
+    position: absolute;
+    display: none;
+    width: 100%;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs {
+    padding: 8px 16px 4px 16px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs {
+    padding: 0px 16px;
+    gap: 6px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs h3 {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer {
+    gap: 2px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate {
+    max-height: 60px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate p {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
+}
+@media (max-width: 900px) and (min-height: 700px) {
+  #miniCard {
+    height: auto;
+  }
+  #miniCard .miniFlag {
+    height: 60px;
+  }
+  #miniCard .miniMain h3 {
+    font-size: 1rem;
+  }
+  #miniCard .miniMain .ratingPrice p {
+    font-size: 0.9rem;
+  }
+  #miniCard .miniMain .addressDesc .address svg {
+    height: 24px;
+  }
+  #miniCard .miniMain .addressDesc .address p {
+    font-size: 0.8rem;
+  }
+  #bigCard .bigMain .bigTop h2, #bigCard .bigMain .bigTop h3 {
+    font-size: 1rem;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top {
+    gap: 8px;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top h3 {
+    font-size: 1.1rem;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p {
+    font-size: 0.9rem;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .bottom .tagsContainer .tag {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs {
+    padding: 16px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigRestaurantImgs .bigCarrousel .carrouselItem {
+    max-height: 180px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs h3 {
+    font-size: 1rem;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate {
+    max-height: 80px;
+  }
+  #bigCard .bigMain .bigBottom .bigImgs .bigDishesImgs .platesContainer .plate p {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 600px) {
+  main #alert {
+    width: 90%;
+    max-width: 400px;
+  }
+  #introCard {
+    width: 100vw;
+    max-height: 75vh;
+    top: 47%;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  #introCard .introHeader {
+    padding: 24px 18px;
+  }
+  #introCard .introHeader .introLogo img {
+    height: 60px;
+  }
+  #introCard .introMain {
+    padding-top: 0;
+    gap: 16px;
+  }
+  #introCard .introMain .introContent h2 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+  #introCard .introMain .introContent .introDescription p {
+    margin-bottom: 4px;
+  }
+  #introCard .introMain .introContent .introFeatures {
+    gap: 16px;
+  }
+  #introCard .footer {
+    padding: 0px 8px 8px 8px;
+    gap: 4px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #introCard .footer p {
+    font-size: 0.7rem;
+    width: 90%;
+  }
+  #tutorialCard .tutorialContent .tutorialSlide .tutorialText h4 {
+    font-size: clamp(1rem, 3vh, 1.2rem);
+  }
+  #tutorialCard .tutorialContent .tutorialSlide .tutorialText p {
+    width: 90%;
+  }
+  #tutorialCard .tutorialFooter .btnPrimary, #tutorialCard .tutorialFooter .btnSecondary {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    width: 80px;
+    padding: 8px 16px;
+  }
+  #filters {
+    width: 100%;
+  }
+  #bigCard .bigMain .bigBottom .bigInfoAll .bigInfo .top p svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+@media (max-width: 600px) and (max-height: 700px) {
+  #introCard .introHeader {
+    padding: 16px 16px 8px 16px;
+  }
+  #introCard .introHeader .introLogo img {
+    height: 40px;
+  }
+  #introCard .introMain .introContent h2 {
+    font-size: clamp(1.1rem, 3vw, 1.2rem);
+  }
+  #introCard .introMain .introContent #introDescription p {
+    font-size: clamp(0.8rem, 3vw, 1rem);
+  }
+  #introCard .introMain .introContent .introFeatures {
+    gap: 8px;
+  }
+  #introCard .introMain .introContent .introFeatures .feature {
+    padding: 4px 8px;
+  }
+  #introCard .introMain .introContent .introFeatures .feature svg {
+    height: 25px;
+  }
+  #introCard .introMain .introContent .introFeatures .feature span {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+  #tutorialCard .tutorialContent .tutorialSlide .tutorialImage {
+    max-width: 280px;
+  }
+}/*# sourceMappingURL=style.css.map */

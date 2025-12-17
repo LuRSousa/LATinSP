@@ -1,0 +1,1994 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Loved+by+the+King&display=swap");
+
+$second-orange: #ff7c1083;
+
+$neutro100: #2c343a;
+$base100: #faf3e0;
+$primaria100: #e18943;
+$primaria80: #eab386;
+$primaria70: #ecbc94;
+$primaria50: #edcbaf;
+$destaque100: #B23A48;
+$destaque90: #B94D5A;
+$contraste100: #007C76;
+$contraste90: #198983;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#menu {
+  background-color: $primaria80;
+  height: 12vh;
+  width: 100vw;
+  z-index: 1000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .logo {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 0px 24px;
+
+    img {
+      width: 300px;
+    }
+  }
+}
+
+main {
+  height: 88vh;
+  width: 100vw;
+  position: relative;
+
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+
+  #screenCard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: #d9d9d979;
+    backdrop-filter: blur(2px);
+    display: block;
+  }
+
+  .helpFloating {
+    position: absolute;
+    bottom: 100px;
+    right: 24px;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    display: block;
+
+    &:hover {
+      transform: scale(1.1);
+      background: darken($contraste100, 10%);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  #alert{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: $base100;
+    border: 3px solid $primaria100;
+    color: $neutro100;
+    border-radius: 15px;
+    gap: 16px;
+    width: 400px;
+    height: 350px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1200;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .top{
+      width: 100%;
+      height: 50px;
+      position: relative;
+
+      .close {
+        position: absolute;
+        border: none;
+        width: 25px;
+        height: 25px;
+        right: 12px;
+        top: 8px;
+        padding: 1px;
+        background-color: $base100;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:hover {
+          transform: scale(1.05);
+          transition: 0.5s;
+        }
+      }
+    }   
+
+    .text{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+
+      #alertDescription{
+        padding: 0px 24px;
+      }
+    }
+
+    #clearFiltersAlert {
+      border: none;
+      border-radius: 10px;
+      background-color: $destaque90;
+      padding: 8px 0px;
+      width: 80%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0px 8px 12px -4px $neutro100;
+      -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+      -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+      transition: 0.5s;
+      color: $base100;
+      margin-bottom: 32px;
+
+      &:hover {
+        transform: scale(1.02);
+        background-color: $destaque100;
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+#introCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: $base100;
+  border: 3px solid $contraste100;
+  color: $neutro100;
+  border-radius: 15px;
+  width: 800px;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1400;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+
+  &.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .introHeader {
+    width: 100%;
+    padding: 32px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+
+    .introLogo img {
+      height: 80px;
+    }
+  }
+
+  .introMain {
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1;
+    overflow-y: auto;
+
+    .introContent {
+      text-align: center;
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        color: $contraste100;
+      }
+
+      #introDescription {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 32px;
+
+        p {
+          margin-bottom: 12px;
+        }
+      }
+
+      .introFeatures {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+
+        .feature {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 8px 12px;
+
+          svg {
+            flex-shrink: 0;
+            color: $contraste100;
+          }
+
+          span {
+            font-weight: 500;
+            width: 90%;
+            text-align: left;
+            color: $neutro100;
+            border-bottom: 2px solid $contraste100;
+            padding-bottom: 8px;
+          }
+        }
+      }
+    }
+
+    .introActions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .btnPrimary {
+        min-width: 180px;
+        background-color: transparent;
+        color: $contraste100;
+        border: 2px solid $contraste100;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .btnSecondary {
+        min-width: 180px;
+        background-color: $contraste100;
+        color: $base100;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 16px 8px 16px;
+
+    p{
+      color: #585b5e;
+      font-size: 0.8rem;
+      width: 45%;
+      text-align: center;
+    }
+  }
+}
+
+#tutorialCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 800px;
+  max-width: 90vw;
+  max-height: 85vh;
+  min-height: 540px;
+  background: $base100;
+  border: 3px solid $contraste100;
+  border-radius: 15px;
+  z-index: 1999;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  &.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .tutorialHeader {
+    width: 100%;
+    padding: 16px 24px 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+    color: $base100;
+    position: relative;
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .btnText {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: $contraste100;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+
+      &:hover {
+        color: darken($contraste100, 10%);
+      }
+    }
+  }
+
+  .tutorialContent {
+    padding: 0px 24px;
+    flex: 1;
+    overflow-y: auto;
+
+    .tutorialSlide {
+      display: none;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+
+      &.active {
+        display: flex;
+      }
+
+      .tutorialImage {
+        max-height: 300px;
+        max-width: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        border: 1px solid $contraste100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .tutorialText {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 12px;
+
+        h4 {
+          font-size: 1.5rem;
+          color: $contraste100;
+        }
+
+        p {
+          width: 80%;
+          font-size: 1rem;
+          color: $neutro100;
+        }
+      }
+    }
+  }
+
+  .tutorialFooter {
+    padding: 16px 24px 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    .btnPrimary{
+      min-width: 100px;
+      background-color: $contraste100;
+      color: $base100;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .btnSecondary {
+      min-width: 100px;
+      background-color: transparent;
+      color: $contraste100;
+      border: 2px solid $contraste100;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .tutorialProgress {
+      font-weight: 600;
+      color: $contraste100;
+    }
+  }
+}
+
+#filters {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: $primaria70;
+  width: 400px;
+  height: 62px;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: height 0.4s ease;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dropdownBar {
+    width: 100%;
+    background-color: $primaria70;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 2px;
+
+    .dropdown {
+      border: none;
+      width: 95%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      padding: 4px 12px;
+      background-color: $primaria50;
+      cursor: pointer;
+      box-shadow: -1px 6px 14px -3px $neutro100;
+      -webkit-box-shadow: -1px 6px 14px -3px $neutro100;
+      -moz-box-shadow: -1px 6px 14px -3px $neutro100;
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 8px;
+        gap: 5px;
+        color: $neutro100;
+      }
+
+      .arrow {
+        transition: 500ms;
+        color: $neutro100;
+      }
+    }
+  }
+
+  .filterForm {
+    margin-top: 30px;
+    display: flex;
+    opacity: 0;
+    height: calc(100% - 150px);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+    transition: opacity 0.4s ease;
+
+    .filterSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      width: 95%;
+      background-color: $primaria50;
+      box-shadow: -1px 6px 14px -3px $neutro100;
+      -webkit-box-shadow: -1px 6px 14px -3px $neutro100;
+      -moz-box-shadow: -1px 6px 14px -3px $neutro100;
+
+      .sectionTitle {
+        width: 100%;
+        position: relative;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+        padding: 4px 12px;
+        cursor: pointer;
+
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 8px;
+          gap: 5px;
+          color: $neutro100;
+
+          #ratingLabelMax{
+            margin-top: 4px;
+          }
+        }
+
+        .arrow {
+          transition: 500ms;
+          color: $neutro100;
+        }
+      }
+
+      .filterOptions {
+        max-height: 0;
+        width: 95%;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 0;
+        flex-wrap: wrap;
+        padding: 0;
+
+        &.open {
+          max-height: 700px;
+          opacity: 1;
+          padding: 16px 8px;
+        }
+
+        .option {
+          width: 45%;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: background-color 300ms ease;
+
+          &:focus-within {
+            background-color: rgba($primaria100, 0.1);
+            border-radius: 4px;
+          }
+
+          input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: $contraste90;
+            cursor: pointer;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background-color: $base100;
+            border-radius: 3px;
+            transition: 200ms;
+            border: 2px solid $base100;
+
+            &:hover{
+              border: 2px solid $contraste90;
+              transition: 200ms;
+            }
+
+            &:checked{
+              background: $contraste90;
+              border: 2px solid $contraste90;
+              transition: 200ms;
+            }
+          }
+
+          .label {
+            font-size: 0.9rem;
+            color: $neutro100;
+          }
+        }
+
+        .value{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 10%;
+          color: $neutro100;
+        }
+
+        input[type="range"] {
+          -webkit-appearance: none;
+          -moz-appearance: none; 
+          appearance: none; 
+          width: 65%;
+          height: 8px;
+          background: $base100;
+          border-radius: 3px;
+          outline: none;
+          cursor: pointer;
+          
+
+          background: linear-gradient(
+            to right,
+            $contraste90 0%,
+            $contraste90 var(--progress, 0%),
+            $base100 var(--progress, 0%),
+            $base100 100%
+          );
+
+          &::-webkit-slider-thumb{
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: $contraste100;
+            cursor: pointer;
+            margin-top: -4px;
+          }
+
+          &::-moz-range-thumb{
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: $contraste100;
+            cursor: pointer;
+          }
+
+          &::-ms-thumb{
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: $contraste100;
+            cursor: pointer;
+          }
+
+          &::-webkit-slider-runnable-track {
+              background: transparent;
+              height: 8px;
+              border-radius: 3px;
+          }
+
+          &::-moz-range-track {
+              background: transparent;
+              height: 8px;
+              border-radius: 3px;
+          }
+
+          &::-ms-track {
+              background: transparent;
+              height: 8px;
+              border-radius: 3px;
+          }
+        }
+      }
+    }
+
+    .btns {
+      width: 100%;
+      background-color: $primaria70;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 0px;
+      position: sticky;
+      bottom: 0;
+
+      #applyFilters {
+        border: none;
+        border-radius: 10px;
+        background-color: $contraste90;
+        padding: 8px 0px;
+        width: 95%;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 8px 12px -4px $neutro100;
+        -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+        -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+        transition: 0.5s;
+        color: $base100;
+
+        &:hover {
+          transform: scale(1.02);
+          background-color: $contraste100;
+          transition: 0.5s;
+        }
+      }
+
+      #clearFilters {
+        border: none;
+        border-radius: 10px;
+        background-color: $destaque90;
+        padding: 8px 0px;
+        width: 95%;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 8px 12px -4px $neutro100;
+        -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+        -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+        transition: 0.5s;
+        color: $base100;
+
+        &:hover {
+          transform: scale(1.02);
+          background-color: $destaque100;
+          transition: 0.5s;
+        }
+      }
+    }
+  }
+}
+
+#miniCard {
+  position: absolute;
+  background: $base100;
+  border: 3px solid $primaria100;
+  color: $neutro100;
+  border-radius: 15px;
+  width: 380px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: 800;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: scale(0.95);
+  overflow: hidden;
+
+  &.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .miniFlag {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px 12px 0px 0px;
+
+    .close {
+      position: absolute;
+      border: none;
+      width: 25px;
+      height: 25px;
+      right: 12px;
+      top: 8px;
+      padding: 1px;
+      background-color: $base100;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        transform: scale(1.05);
+        transition: 0.5s;
+      }
+    }
+  }
+
+  .miniMain {
+    width: 100%;
+    border-top: 3px solid $neutro100;
+    box-shadow: 0px 8px 12px -4px $neutro100;
+    -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+    -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    h3 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid $neutro100;
+      padding: 0px 24px 4px 24px;
+      text-align: center;
+    }
+
+    p{
+      .sr-only{
+        position: relative;
+      }
+    }
+
+    .miniCarrousel {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+
+      .carrouselItem {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 80%;
+        height: 100%;
+        opacity: 0;
+        transform: scale(0.95) translateX(-50%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        border-radius: 10px;
+
+        &.active {
+          opacity: 1;
+          transform: scale(1) translateX(-50%);
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          object-fit: cover;
+          box-shadow: 0px 4px 8px -4px $neutro100;
+          -webkit-box-shadow: 0px 4px 8px -4px $neutro100;
+          -moz-box-shadow: 0px 4px 8px -4px $neutro100;
+        }
+      }
+
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+    }
+
+    .ratingPrice {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      font-weight: bold;
+
+      p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:last-child{
+          display: flex;
+          gap: 2px;
+        }
+      }
+    }
+  }
+
+  .miniInfo {
+    width: 100%;
+    padding: 16px;
+    border-radius: 0px 0px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    .addressDesc {
+      width: 100%;
+      border-radius: 10px;
+      background-color: $base100;
+      box-shadow: 0px 8px 12px -4px $neutro100;
+      -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+      -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+
+      .address {
+        width: 95%;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #2f2f2f59;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        p{
+          text-decoration: none;
+        }
+
+        svg {
+          path {
+            transform: translateX(-30%) translateY(-10%);
+          }
+        }
+      }
+
+      .tagsContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        flex-wrap: nowrap;
+
+        .tag {
+          font-size: 0.8rem;
+          padding: 4px 8px;
+          border-radius: 5px;
+          background-color: $second-orange;
+          display: inline-block;
+          transition: 500ms;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .showMore {
+      position: relative;
+      border: none;
+      border-radius: 10px;
+      background-color: $base100;
+      padding: 8px 0px;
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0px 8px 12px -4px $neutro100;
+      -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+      -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+      transition: 0.5s;
+
+      span {
+        margin-right: 30px;
+        color: $neutro100;
+      }
+
+      svg {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        height: 100%;
+        padding: 9px 0px;
+        width: 45px;
+        border-radius: 0px 10px 10px 0px;
+        fill: $base100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 300;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+        background-color: rgba(243, 241, 233, 0.8);
+        transition: 0.5s;
+      }
+    }
+  }
+}
+
+#bigCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: $base100;
+  border: 3px solid $primaria100;
+  color: $neutro100;
+  border-radius: 15px;
+  width: 980px;
+  height: 650px;
+  display: none;
+  flex-direction: column;
+  z-index: 1200;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .bigFlag {
+    width: 100%;
+    height: 98px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px 12px 0px 0px;
+    position: relative;
+
+    .close {
+      position: absolute;
+      border: none;
+      width: 25px;
+      height: 25px;
+      right: 12px;
+      top: 8px;
+      padding: 1px;
+      background-color: $base100;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        transform: scale(1.05);
+        transition: 0.5s;
+      }
+    }
+  }
+
+  .bigMain {
+    width: 100%;
+    height: 100%;
+    border-top: 3px solid $neutro100;
+
+    .bigTop {
+      width: 100%;
+      height: 12%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 3px solid $neutro100;
+      position: relative;
+
+      p {
+        font-size: 2rem;
+        margin-bottom: 5px;
+      }
+
+      h2,
+      h3 {
+        width: 50%;
+        text-align: center;
+      }
+    }
+
+    .bigMiddle{
+      width: 100%;
+      height: 8%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 3px solid $neutro100;
+      position: relative;
+    }
+
+    .bigBottom {
+      width: 100%;
+      height: 88%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .bigInfoAll {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 16px;
+        gap: 24px;
+        border-radius: 0px 0px 0px 12px;
+
+        .bigInfo {
+          width: 100%;
+          height: 90%;
+          background-color: $base100;
+          border-radius: 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 16px;
+          box-shadow: 0px 8px 12px -4px $neutro100;
+          -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+          -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+
+          .top {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 8px;
+
+            h3 {
+              padding-bottom: 8px;
+              text-align: center;
+              border-bottom: 1px solid $neutro100;
+            }
+
+            p {
+              width: 100%;
+              text-align: left;
+              display: flex;
+              align-items: center;
+              text-decoration: none;
+              gap: 6px;
+
+              a {
+                text-decoration: none;
+                color: $neutro100;
+                transition: 500ms;
+
+                &:hover {
+                  text-decoration: underline;
+                  transition: 500ms;
+                }
+              }
+            }
+          }
+
+          .bottom {
+            width: 100%;
+
+            .starsBox{
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .tagsContainer {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              flex-wrap: wrap;
+              overflow-x: hidden;
+              padding: 0px 8px;
+              border-top: 1px solid $neutro100;
+              padding-top: 16px;
+
+              .tag {
+                width: auto;
+                font-size: 0.8rem;
+                padding: 8px 8px;
+                border-radius: 5px;
+                background-color: $second-orange;
+                transition: 500ms;
+              }
+            }
+          }
+        }
+
+        .bigInfoBtn {
+          position: relative;
+          border: none;
+          border-radius: 10px;
+          background-color: $base100;
+          padding: 8px 0px;
+          width: 100%;
+          font-size: 1.2rem;
+          font-weight: bold;
+          cursor: pointer;
+          box-shadow: 0px 8px 12px -4px $neutro100;
+          -webkit-box-shadow: 0px 8px 12px -4px $neutro100;
+          -moz-box-shadow: 0px 8px 12px -4px $neutro100;
+          transition: 0.5s;
+          text-decoration: none;
+          color: $neutro100;
+          display: flex;
+          justify-content: center;
+
+          span {
+            margin-right: 30px;
+            text-decoration: none;
+            color: $neutro100;
+          }
+
+          svg {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            height: 100%;
+            padding: 9px 0px;
+            width: 45px;
+            border-radius: 0px 10px 10px 0px;
+            fill: $base100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 300;
+          }
+
+          &:hover {
+            transform: scale(1.02);
+            background-color: rgba(243, 241, 233, 0.8);
+            transition: 0.5s;
+          }
+        }
+      }
+
+      .bigImgs {
+        width: 50%;
+        height: 100%;
+
+        .bigRestaurantImgs {
+          width: 100%;
+          height: 50%;
+          padding: 24px 16px 8px 16px;
+
+          .bigCarrousel {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            .carrouselItem {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              width: 85%;
+              height: 100%;
+              opacity: 0;
+              transform: scale(0.95) translateX(-50%);
+              transition: opacity 0.3s ease, transform 0.3s ease;
+              border-radius: 10px;
+
+              &.active {
+                opacity: 1;
+                transform: scale(1) translateX(-50%);
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                object-fit: cover;
+                box-shadow: 0px 4px 8px -4px $neutro100;
+                -webkit-box-shadow: 0px 4px 8px -4px $neutro100;
+                -moz-box-shadow: 0px 4px 8px -4px $neutro100;
+              }
+            }
+
+            button {
+              border: none;
+              background: none;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .bigDishesImgs{
+          width: 100%;
+          height: 50%;
+          padding: 24px 16px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
+
+          .platesContainer{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+
+            .plate{
+              width: 28%;
+              max-width: 130px;
+              min-height: 60px;
+              height: 45%;
+              max-height: 90px;
+              display: flex;
+              position: relative;
+              border-radius: 8px;
+              box-shadow: 0px 4px 8px -4px $neutro100;
+              -webkit-box-shadow: 0px 4px 8px -4px $neutro100;
+              -moz-box-shadow: 0px 4px 8px -4px $neutro100;
+
+              img{
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+              }
+
+              p{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+                opacity: 0;
+                background: #2C343A;
+                background: linear-gradient(360deg,rgba(44, 52, 58, 1) 0%, rgba(255, 255, 255, 0) 100%);
+                transition: 500ms;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                text-align: center;
+                color: $base100;
+                padding: 4px 8px;
+
+                &:hover{
+                  opacity: 1;
+                  transition: 500ms;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px){
+  #miniCard{
+    left: 50% !important;
+    top: 42% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  #bigCard {
+    position: absolute;
+    max-width: 100%;
+    max-height: calc(90vh - 110px);
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    top: 0;
+    transform: translate(-50%, 0%) !important;
+
+    .bigFlag{
+      border-radius: 0px;
+    }
+
+    .bigMain{
+      .bigBottom{
+        .bigInfoAll{
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px){  
+  #menu{
+    height: 9vh;
+    justify-content: center;
+
+    .logo{
+      img{
+        width: 200px;
+      }
+    }
+  }
+
+  #filters{
+    .filterForm{
+      .btns{
+        #clearFilters, #applyFilters{
+          font-size: clamp(1rem, 3vw, 1.4rem);
+        }
+      }
+    }
+  }
+  
+  main{
+    height: 91vh;
+
+    .helpFloating {
+      width: 50px;
+      height: 50px;
+      bottom: 120px;
+    }
+  }
+  
+  #introCard {
+    .introMain {
+      padding: 24px 16px;
+      gap: 24px;
+
+      .introContent {
+        h2 {
+          font-size: 2rem;
+        }
+
+        .introFeatures {
+          .feature {
+            text-align: center;
+            gap: 8px;
+
+            span {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      .introActions {
+        flex-direction: column;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  #tutorialCard {
+    width: 95vw;
+
+    .tutorialContent {
+      padding: 24px 16px;
+
+      .tutorialSlide {
+        .tutorialImage {
+          max-height: 200px;
+        }
+      }
+    }
+
+    .tutorialFooter {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+
+      .btnText {
+        order: 3;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
+    }
+  }
+  
+  #miniCard{
+    max-height: 450px;
+    width: 320px;
+    margin-top: 30px;
+
+    .miniFlag{
+      height: 50px;
+    }
+
+    .miniMain{
+      padding: 8px 8px;
+      gap: 8px;
+
+      h3{
+        font-size: 0.95rem;
+        padding: 0px 24px 0px 24px;
+      }
+
+      .miniCarrousel{
+        height: 130px;
+      }
+
+      .ratingPrice{
+        p{
+          font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+      }
+    }
+
+    .miniInfo{
+      padding: 8px 8px;
+      gap: 8px;
+
+      .addressDesc{
+        .address{
+          gap: 8px;
+
+          svg{
+            height: 20px;
+          }
+
+          p{
+             font-size: clamp(0.8rem, 3vw, 1rem);
+          }
+        }
+
+        .tagsContainer{
+          gap: 4px;
+
+          .tag{
+            font-size: clamp(0.7rem, 3vw, 0.8rem);
+          }
+        }
+      }
+
+      .showMore{
+        font-size: 1.1rem;
+        padding: 6px 0px;
+      }
+    }
+  }
+  
+  #bigCard{
+    .bigFlag{
+      background-size: cover;
+      height: 60px;
+    }
+
+    .bigMain{
+      .bigTop{
+        h2, h3{
+          font-size: clamp(0.9rem, 3vw, 1.3rem);
+        }
+      }
+
+      .bigMiddle{
+        display: flex;
+        justify-content: space-evenly;
+
+        .info {
+          background-color: transparent;
+          border: none;
+          font-weight: bold;
+          padding: 10px;
+          cursor: pointer;
+          transition: color 0.3s ease;
+          width: 40%;
+          padding: 0;
+          color: $neutro100;
+        }
+
+        .active {
+          color: #e18943;
+          border-bottom: 2px solid #e18943;
+        }
+      }
+
+      .bigBottom {
+        display: flex;
+        height: 80%;
+        position: relative;
+
+        .bigInfoAll{
+          position: absolute;
+          width: 100%;
+          padding: 8px;
+          gap: 16px;
+
+          .bigInfo{
+            padding: 8px;
+
+            .top{
+              gap: 6px;
+
+              h3{
+                font-size: clamp(0.9rem, 3vw, 1rem);
+                padding-bottom: 4px;
+              }
+
+              p{
+                font-size: clamp(0.9rem, 3vw, 1.3rem);
+
+                svg{
+                  width: 32px;
+                  height: 32px;
+                }
+              }
+            }
+
+            .bottom{
+              .tagsContainer{
+                padding-top: 8px;
+
+                .tag{
+                  font-size: clamp(0.7rem, 2vw, 1.1rem);
+                  padding: 4px 6px;
+                }
+              }
+            }
+          }
+
+          .bigInfoBtn{
+            font-size: clamp(0.9rem, 3vw, 1rem);
+          }
+        }
+
+        .bigImgs{
+          position: absolute;
+          display: none;
+          width: 100%;
+
+          .bigRestaurantImgs{
+            padding: 8px 16px 4px 16px;
+          }
+
+          .bigDishesImgs{
+            padding: 0px 16px;
+            gap: 6px;
+
+            h3{
+              font-size: clamp(0.9rem, 3vw, 1rem);
+            }
+
+            .platesContainer{
+              gap: 2px;
+
+              .plate{
+                max-height: 60px;
+
+                p{
+                  font-size: clamp(0.8rem, 3vw, 1rem);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-height: 700px){
+    #miniCard{
+      height: auto;
+
+      .miniFlag{
+        height: 60px;
+      }
+
+      .miniMain{
+        h3{
+          font-size: 1rem;
+        }
+
+        .ratingPrice{
+          p{
+            font-size: 0.9rem
+          }
+        }
+
+        .addressDesc{
+          .address{
+            svg{
+              height: 24px;
+            }
+            
+            p{
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+    }
+
+    #bigCard{
+      .bigMain{
+        .bigTop{
+          h2, h3{
+            font-size: 1rem;
+          }
+        }
+
+        .bigBottom{
+          .bigInfoAll{
+            .bigInfo{
+              .top{
+                gap: 8px;
+
+                h3{
+                  font-size: 1.1rem;
+                }
+
+                p{
+                  font-size: 0.9rem;
+                }
+              }
+
+              .bottom{
+                .tagsContainer{
+                .tag{
+                  font-size: 0.8rem;
+                  padding: 6px 8px;
+                }
+              }
+              }
+            }
+          }
+
+          .bigImgs{
+            .bigRestaurantImgs{
+              padding: 16px;
+
+              .bigCarrousel{
+                .carrouselItem{
+                  max-height: 180px;
+                }
+              }
+            }
+
+            .bigDishesImgs{
+              h3{
+                font-size: 1rem;
+              }
+
+              .platesContainer{
+                .plate{
+                  max-height: 80px;
+
+                  p{
+                    font-size: 0.9rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px){
+  main{
+    #alert{
+      width: 90%;
+      max-width: 400px;
+    }
+  }
+
+  #introCard{
+    width: 100vw;
+    max-height: 75vh;
+    top: 47%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    .introHeader{
+      padding: 24px 18px;
+
+      .introLogo{
+        img{
+          height: 60px;
+        }
+      }
+    }
+
+    .introMain{
+      padding-top: 0;
+      gap: 16px;
+
+      .introContent{
+        h2 {
+          font-size: 1.6rem;
+          margin-bottom: 8px;
+        }
+
+        .introDescription{
+          p{
+            margin-bottom: 4px;
+          }
+        }
+
+        .introFeatures{
+          gap: 16px;
+        }
+      } 
+    } 
+
+    .footer{
+      padding: 0px 8px 8px 8px;
+      gap: 4px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p{
+        font-size: 0.7rem;
+        width: 90%;
+      }
+    }
+  }
+
+  #tutorialCard{
+    .tutorialContent{
+      .tutorialSlide{
+        .tutorialText{
+          h4{
+            font-size: clamp(1rem, 3vh, 1.2rem);
+          }
+
+          p{
+            width: 90%;
+          }
+        }
+      }
+    }
+
+    .tutorialFooter{
+      .btnPrimary, .btnSecondary{
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        width: 80px;
+        padding: 8px 16px;
+      }
+    }
+  }
+
+  #filters{
+    width: 100%;
+  }
+  
+  #bigCard{
+    .bigMain{
+      .bigBottom{
+        .bigInfoAll{
+          .bigInfo{
+            .top{
+              p{
+                svg{
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-height: 700px){
+    #introCard{
+      .introHeader{
+        padding: 16px 16px 8px 16px;
+
+        .introLogo{
+          img{
+            height: 40px;
+          }
+        }
+      }
+
+      .introMain{
+        .introContent{
+          h2{
+            font-size: clamp(1.1rem, 3vw, 1.2rem);
+          }
+
+          #introDescription{
+            p{
+              font-size: clamp(0.8rem, 3vw, 1rem);
+            }
+          }
+
+          .introFeatures{
+            gap: 8px;
+
+            .feature{
+              padding: 4px 8px;
+
+              svg{
+                height: 25px;
+              }
+
+              span{
+                font-size: clamp(0.9rem, 3vw, 1rem);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #tutorialCard{
+      .tutorialContent{
+        .tutorialSlide{
+          .tutorialImage{
+            max-width: 280px;
+          }
+        }
+      }
+    }
+  }
+}
