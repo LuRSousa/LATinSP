@@ -23,7 +23,7 @@ Combater a falta de identificação cultural entre brasileiros e suas raízes la
 O projeto segue o padrão **MVC (Model-View-Controller)**, garantindo uma separação clara entre a interface do usuário, a lógica de negócio e o gerenciamento de dados assíncronos via PHP.
 
 ### Status
-**Concluído 🏆** (Ago/24 - Dez/24)
+**Concluído** (Ago/24 - Dez/24)
 
 ### Demonstração
 [Acesse o LATinSP online](https://latinsp.infinityfreeapp.com/)
