@@ -10,6 +10,7 @@ Combater a falta de identificação cultural entre brasileiros e suas raízes la
 * **Backend:** PHP (Arquitetura MVC)
 * **Banco de Dados:** MySQL (Relações complexas)
 * **APIs:** Leaflet.js (Funcionalidade principal de mapa)
+* **Comunicação Assíncrona:** API REST própria em PHP (integração Frontend/Backend)
 * **Deploy:** InfinityFree
 
 ### Funcionalidades Principais
