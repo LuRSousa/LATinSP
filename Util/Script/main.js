@@ -23,7 +23,7 @@ let map = L.map("map", {
 map.getContainer().setAttribute('role', 'application');
 map.getContainer().setAttribute('aria-label', 'Mapa interativo de restaurantes latino-americanos em São Paulo');
 
-L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_47r8_1_ac842cfd9d9652817a09152e", {
   attribution: '&copy; <a href="https://carto.com/">Carto</a>',
 }).addTo(map);
 
